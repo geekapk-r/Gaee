@@ -1,15 +1,19 @@
 require './lib/version.rb'
 
+# GeekApk Gem Specification
+
 Gem::Specification.new do |s|
+  make_files = proc {|s| s.map { |f| "lib/#{f}.rb" } }
+
   s.name        = 'gaee'
-  s.version     = VERSION
+  s.version     = Gaee::VERSION
   s.executables << 'gaee'
   s.date        = '2018-02-17'
-  s.summary     = "GeekApk API Binding"
-  s.description = "GeekApkR Server API Binding for Ruby"
-  s.authors     = ["duangsuse"]
+  s.summary     = 'GeekApk API Binding'
+  s.description = 'GeekApkR CLI and Server API Binding for Ruby'
+  s.authors     = ['duangsuse']
   s.email       = 'fedora-opensuse@outlook.com'
-  s.files       = ["lib/gaee.rb"]
+  s.files       = make_files.call %w[gaee metapi misc models realtime version]
   s.homepage    = 'https://geekapk.org'
-  s.license     = 'GPL-3.0'
+  s.license     = 'MIT'
 end

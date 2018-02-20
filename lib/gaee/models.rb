@@ -1,4 +1,4 @@
-require 'misc'
+require 'gaee/misc'
 
 # GeekApk Models in Ruby
 class Gaee
@@ -8,8 +8,6 @@ class Gaee
       @id, @name, @desc, @super_ = nil
       @fetched = false
     end
-
-    undef_method :name
 
     %w[name desc super].each do |m|
       define_method m do

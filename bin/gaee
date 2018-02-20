@@ -1,3 +1,7 @@
 #!/usr/bin/env ruby
+# GeekApk CLI Client
+# License MIT
 
-require 'gaee'
+require 'gaee/cli'
+
+GCL.main ARGV

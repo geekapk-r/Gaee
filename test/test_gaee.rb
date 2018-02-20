@@ -3,7 +3,7 @@ require 'gaee'
 
 TEST_UID = ENV['GA_UID']
 TEST_TOKEN = ENV['GA_TOKEN']
-TEST_IS_ADMIN = ENV['GA_ISADMIN'] || Gaee::Meta.authors.include? TEST_UID
+TEST_IS_ADMIN = ENV['GA_ISADMIN'] || false
 
 # Test for GeekApk API Library
 # Tests needs admin rights/user rights to do will be skipped if no login info. is set

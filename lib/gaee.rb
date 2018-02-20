@@ -11,7 +11,7 @@ rescue LoadError
   LOG.warn('Failed to require WebSocket library, Gaee will not handle messages')
 end
 
-load 'lib/version.rb'
+require 'gaee/version'
 
 # GeekApk Client Library
 class Gaee

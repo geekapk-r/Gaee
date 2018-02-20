@@ -1,5 +1,7 @@
 require 'rake/testtask'
+
 require 'gaee'
+require 'gaee/cli'
 
 # Test this Gem
 
@@ -25,6 +27,7 @@ end
 
 desc 'Print Models&Methods'
 task :model do
+  GCL.print_models
 end
 
 desc 'Run tests'

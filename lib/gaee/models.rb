@@ -157,8 +157,8 @@ class Gaee
 
   # Application Upadte
   class Update
-    ATTRS = %[target graph_flag name alias optbtn blame installurl removeurl
-    apimin apitar size version reversion updates perm released_at]
+    ATTRS = %w[target graph_flag name alias optbtn blame installurl removeurl
+    apimin apitar size version updates perm released_at]
 
     def initialize(target_aid, reversion)
       @target_aid = target_aid
@@ -198,7 +198,7 @@ class Gaee
   class Recommend
     class RecommendItem
       def initialize; end
-      attr_accessor %i[recommend uid reason created]
+      %i[recommend uid reason created].each { |s| attr_accessor s }
     end
 
     def initialize(target)
@@ -219,7 +219,7 @@ class Gaee
       def create(app, recommend, *reason)
       end
 
-      def update(app, ctime, reason, *app)
+      def update(app_target, ctime, reason, *app)
       end
 
       def delete(app, *ctime)
@@ -361,10 +361,10 @@ class Gaee
       def locate(target, cid)
       end
 
-      def all(start, end, sort = SortOption.created, *filter, is_pop = false, toplev = true)
+      def all(start, ends, sort = SortOption.created, filter = nil, is_pop = false, toplev = true)
       end
 
-      def in_app(app, start, end, sort = SortOption.created, *filter, toplev = true)
+      def in_app(app, start, ends, sort = SortOption.created, filter = nil, toplev = true)
       end
 
       def num(is_pop = false)
@@ -373,7 +373,7 @@ class Gaee
       def numof_target(app)
       end
 
-      def search(text, *inapp, sort = SortOption.created, *filter, pop_only = false, toplev = false)
+      def search(text, inapp = nil, sort = SortOption.created, filter = nil, pop_only = false, toplev = false)
       end
 
       def replies(cmid, extra = true)
@@ -425,7 +425,7 @@ class Gaee
     end
 
     class << self
-      def create(badge, *link, *label, has_graph = false)
+      def create(badge, link = nil, label = nil, has_graph = false)
       end
 
       def all(open = true)
@@ -442,7 +442,7 @@ class Gaee
   class Post
     class PostItem
       def initialize; end
-      attr_accessor %i[from target type cmid created_at]
+      %i[from target type cmid created_at].each { |s| attr_accessor s }
     end
 
     class << self
@@ -488,10 +488,10 @@ class Gaee
       def create(type = 0, *accessable_to)
       end
 
-      def mine(*type, *accessable_to)
+      def mine(type = nil, *accessable_to)
       end
 
-      def shared(*user, *type, *accessable_to)
+      def shared(user = nil, type = nil, *accessable_to)
       end
     end
 
@@ -504,7 +504,7 @@ class Gaee
       def numof
       end
 
-      def all(start, end)
+      def all(start, ends)
       end
 
       def delete(ctime)
@@ -519,7 +519,7 @@ class Gaee
   class Rank
     class RankItem
       def initialize; end
-      attr_accessor %i[target user rank created_at]
+      %i[target user rank created_at].each { |s| attr_accessor s }
     end
 
     class << self

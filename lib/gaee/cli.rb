@@ -21,9 +21,9 @@ end
 def GCL.print_models
   Gaee::MODELS.each do |m|
     puts "Model #{m.name}".yellow
-    if m.methods(false).any?
+    if m.singleton_methods.any?
       puts "Class Methods".red
-      ap m.methods(false)
+      ap m.singleton_methods
     end
     if m.instance_methods(false).any?
       puts "Instance Methods".red

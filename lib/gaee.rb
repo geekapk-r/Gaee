@@ -12,9 +12,12 @@ rescue LoadError
 end
 
 require 'gaee/version'
+require 'gaee/models'
 
 # GeekApk Client Library
 class Gaee
+  MODELS = [Post, PM, Comment, MessageRecord, Rank, App, Update, Recommend, User, Headline, Category]
+
   def version
     VERSION
   end

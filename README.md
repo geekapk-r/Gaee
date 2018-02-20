@@ -16,9 +16,11 @@ Gaee 库 的具体食用方法请查看 `ri` 文档或者 [wiki](https://github.
 
 + Ruby _1.9+_ 但是，测试的环境是 `ruby 2.6.0dev (2018-02-18 trunk 62469) [x86_64-linux]`
 
-+ `gem 'json'` 因为 API 交换信息是使用 `JSON` 序列化的
++ `gem install 'json'` 因为 API 交换信息是使用 `JSON` 序列化的
 
-+ `gem 'em-websocket'` _可选的_ 如果需要使用可能的即时推送频道的话
++ `gem install 'em-websocket'` _可选的_ 如果需要使用可能的即时推送频道的话
+
++ `gem install 'awesome_print'` _因为作者比较懒就必须了_ CLI 需要打印好看的彩色字体
 
 + `logger` 使用它记录一些日志
 
@@ -27,6 +29,32 @@ Gaee 库 的具体食用方法请查看 `ri` 文档或者 [wiki](https://github.
 + `gem 和 rake` _构建依赖_ 包管理和构建工具
 
 ## 模型们
+
+`Gaee::MODELS` 可以查看模型列表
+
+具体的模型们：
+
++ __Post__ 收件箱
+
++ __PM__ 用户私有记录
+
++ __Comment__ 评论
+
++ __MessageRecord__ 消息记录，实现朋友圈的就是它
+
++ __Rank__ 一个评分
+
++ __App__ 一个应用
+
++ __Upadte__ 应用的一个更新
+
++ __Recommend__ 一个应用推荐
+
++ __User__ 用户
+
++ __Headline__ 头条
+
++ __Category__ 分类
 
 ## 许可证
 
@@ -53,3 +81,5 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
 ## CLI 用途
+
+> 坏耶！ CLI 正在编写中

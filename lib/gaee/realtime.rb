@@ -1,6 +1,6 @@
 class Gaee
   # GeekApk push API library
-  module RealTime
+  module Realtime
     class << self
     end
   end

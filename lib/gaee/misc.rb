@@ -6,7 +6,7 @@
 class Gaee
   # Misc modules like Option modules
   module Misc
-    TOKEN_UPDATE_DELAY = 60 * 30
+    TOKEN_UPDATE_DELAY = 60 * 50
     ABCS = 'abcdefghijklmnopqrstuvwxyz'.chars
     NUMS = '0123456789'.chars
     BASE64 = '\='.chars + NUMS + ABCS + ABCS.map(&:upcase)
@@ -77,13 +77,6 @@ class Gaee
           define_method m do; m; end
         end
       end
-    end
-  end
-
-  class << self
-    # Returns a random string includes Base64 chars
-    def new_token
-      %w[? ? ? ?].map { BASE64.sample }
     end
   end
 end

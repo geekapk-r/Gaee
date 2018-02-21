@@ -57,6 +57,7 @@ class Gaee
     def initialize(id)
       @id = id
       @last_readed = 0
+      @sort, @filter = nil
       ATTRS.each { |a| instance_variable_set("@#{a}", nil) }
       @fetched = false
     end
@@ -81,7 +82,23 @@ class Gaee
 
     def delete; end
 
-    def comments(page = 1, sort = SortOption.created, *filter); end
+    def comments(sort = SortOption.created, page = nil, *filter)
+      if page.nil?
+        @sort = sort
+        @filter = filter
+        return next_comments
+      end
+      limit = page * Gaee::PAGE
+      starts = (page - 1) * Gaee::PAGE
+      Comment.in_app(@id, starts, limit, sort, filter)
+    end
+
+    def next_comments
+      limit = @last_readed + Gaee::PAGE
+      starts = @last_readed
+      @last_readed += Gaee::PAGE
+      Comment.in_app(@id, starts, limit, @sort, @filter)
+    end
 
     def recommends; end
 
@@ -123,7 +140,7 @@ class Gaee
       def search(text, category = nil, sort = AppSortOption.updated, *filter); end
     end
 
-    attr_accessor :id, :fetched, :last_readed
+    attr_accessor :id, :fetched, :last_readed, :sort, :filter
   end
 
   # Application Upadte
@@ -156,6 +173,8 @@ class Gaee
       def create(app, details); end
 
       def reversions(app); end
+
+      def check(apps); end
     end
 
     attr_accessor :target_aid, :reversion, :fetched

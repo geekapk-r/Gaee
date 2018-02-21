@@ -1,10 +1,11 @@
 ##
-# 坏耶！是模型们！
+# Bad! GeekApk Models
 
 require 'gaee/misc'
 
 # GeekApk Models in Ruby
 class Gaee
+  ##
   # Category
   class Category
     def initialize(id)
@@ -22,33 +23,24 @@ class Gaee
       end
     end
 
-    def delete
-    end
+    def delete; end
 
-    def parent
-    end
+    def parent; end
 
-    def child
-    end
+    def child; end
 
-    def apps(sort = AppSortOption.updated, filter = nil, super_super = false)
-    end
+    def apps(sort = AppSortOption.updated, filter = nil, super_super = false); end
 
-    def fetch
-    end
+    def fetch; end
 
     class << self
-      def create(name, desc = "", *super_)
-      end
+      def create(name, desc = '', *super_); end
 
-      def all
-      end
+      def all; end
 
-      def toplev
-      end
+      def toplev; end
 
-      def tree
-      end
+      def tree; end
     end
 
     attr_accessor :id, :fetched
@@ -56,14 +48,15 @@ class Gaee
 
   # Application
   class App
-    ATTRS = %w[graph_flag parent parent_parent creator pkgname name app_alias
-    applayout optbtn blame installurl removeurl apimin apitar size version reversion
-    special desc updates lang srcurl homeurl license perm dev root_stat need_touch need_framework
-    created_at updated_at stars count rank rank_avg replies pinned_messages]
-    READ_ONLY = %w[creator blame created_at updated_at stars count rank rank_avg replies]
+    ATTRS = %i[graph_flag parent parent_parent creator pkgname name app_alias
+               applayout optbtn blame installurl removeurl apimin apitar size version reversion
+               special desc updates lang srcurl homeurl license perm dev root_stat need_touch need_framework
+               created_at updated_at stars count rank rank_avg replies pinned_messages].freeze
+    READ_ONLY = %i[creator blame created_at updated_at stars count rank rank_avg replies].freeze
 
     def initialize(id)
       @id = id
+      @last_readed = 0
       ATTRS.each { |a| instance_variable_set("@#{a}", nil) }
       @fetched = false
     end
@@ -86,79 +79,57 @@ class Gaee
     alias :developer creator
     alias :category parent
 
-    def delete
-    end
+    def delete; end
 
-    def comments(page = 1, sort = SortOption.created, *fiter)
-    end
+    def comments(page = 1, sort = SortOption.created, *filter); end
 
-    def recommends
-    end
+    def recommends; end
 
-    def recommended
-    end
+    def recommended; end
 
-    def ranks
-    end
+    def ranks; end
 
-    def staraganzers
-    end
+    def staraganzers; end
 
-    def parises
-    end
+    def parises; end
 
     def versions
       Update.reversions @id
     end
 
-    def icons
-    end
+    def icons; end
 
-    def get_icon
-    end
+    def icon(*rev); end
 
-    def icon(*rev)
-    end
+    def update_icon(rev, icon); end
 
-    def update_icon(rev, icon)
-    end
+    def delete_icon(rev); end
 
-    def delete_icon(rev)
-    end
+    def previews; end
 
-    def previews
-    end
+    def preview(slot); end
 
-    def preview(slot)
-    end
+    def update_preview(slot, image); end
 
-    def update_preview(slot, image)
-    end
+    def delete_preview(slot); end
 
-    def delete_preview(slot)
-    end
-
-    def fetch
-    end
+    def fetch; end
 
     class << self
-      def create(details)
-      end
+      def create(details); end
 
-      def all(sort = AppSortOption.updated, *filter)
-      end
+      def all(sort = AppSortOption.updated, *filter); end
 
-      def search(text, category = nil, sort = AppSortOption.updated, *filter)
-      end
+      def search(text, category = nil, sort = AppSortOption.updated, *filter); end
     end
 
-    attr_accessor :id, :fetched
+    attr_accessor :id, :fetched, :last_readed
   end
 
   # Application Upadte
   class Update
     ATTRS = %w[target graph_flag name alias optbtn blame installurl removeurl
-    apimin apitar size version updates perm released_at]
+               apimin apitar size version updates perm released_at].freeze
 
     def initialize(target_aid, reversion)
       @target_aid = target_aid
@@ -175,20 +146,16 @@ class Gaee
       end
     end
 
-    def delete
-    end
+    def delete; end
 
     alias :app target
 
-    def fetch
-    end
+    def fetch; end
 
     class << self
-      def create(app, details)
-      end
+      def create(app, details); end
 
-      def reversions(app)
-      end
+      def reversions(app); end
     end
 
     attr_accessor :target_aid, :reversion, :fetched
@@ -196,8 +163,10 @@ class Gaee
 
   # Recommend
   class Recommend
+    # Application recommend log
     class RecommendItem
       def initialize; end
+
       %i[recommend uid reason created].each { |s| attr_accessor s }
     end
 
@@ -206,27 +175,20 @@ class Gaee
       @fetched = false
     end
 
-    def recommends
-    end
+    def recommends; end
 
-    def recommended
-    end
+    def recommended; end
 
-    def fetch
-    end
+    def fetch; end
 
     class << self
-      def create(app, recommend, *reason)
-      end
+      def create(app, recommend, *reason); end
 
-      def update(app_target, ctime, reason, *app)
-      end
+      def update(app_target, ctime, reason, *app); end
 
-      def delete(app, *ctime)
-      end
+      def delete(app, *ctime); end
 
-      def user_recommends(user)
-      end
+      def user_recommends(user); end
     end
 
     attr_accessor :target, :fetched
@@ -255,64 +217,47 @@ class Gaee
 
     alias :following followed
 
-    def delete
-    end
+    def delete; end
 
-    def get_avatar
-    end
+    def avatars; end
 
-    def avatars
-    end
-
-    def avatar(id = nil)
+    def avatar(*id)
       get_avatar if id.nil?
     end
 
-    def update_avatar(id, avatar)
-    end
+    def update_avatar(id, avatar); end
 
-    def delete_avatar(id)
-    end
+    def delete_avatar(id); end
 
-    def apps(sort = AppSortOption.updated, *filter)
-    end
+    def apps(sort = AppSortOption.updated, *filter); end
 
-    def pops(sort = SortOption.created, *filter)
-    end
+    def pops(sort = SortOption.created, *filter); end
 
-    def stared(is_app = true)
-    end
+    def stared(is_app = true); end
 
-    def ranks
-    end
+    def ranks; end
 
-    def praised(is_app = true)
-    end
+    def praised(is_app = true); end
 
     def news
+      require 'gaae/metapi'
+      Comment.in_app(Gaee::Meta)
     end
 
-    def albums
-    end
+    def albums; end
 
-    def pm(text)
-    end
+    def pm(text); end
 
-    def recommends
-    end
+    def recommends; end
 
-    def fetch
-    end
+    def fetch; end
 
     class << self
-      def create(password)
-      end
+      def create(password); end
 
-      def all(sort = UserSortOption.online, *filter)
-      end
+      def all(sort = UserSortOption.online, *filter); end
 
-      def search(text, sort = UserSortOption.online, *filter)
-      end
+      def search(text, sort = UserSortOption.online, *filter); end
     end
 
     attr_accessor :id, :fetched
@@ -331,53 +276,39 @@ class Gaee
       end
     end
 
-    def text=
-    end
+    def text=; end
 
     alias :is_pop? is_pop
     alias :user sender
     alias :replys reply_to
     alias :parent reply_to
 
-    def detail_replies
-    end
+    def detail_replies; end
 
-    def staraganzers
-    end
+    def staraganzers; end
 
-    def parises
-    end
+    def parises; end
 
-    def delete
-    end
+    def delete; end
 
-    def fetch
-    end
+    def fetch; end
 
     class << self
-      def create(target, text, *replys)
-      end
+      def create(target, text, *replys); end
 
-      def locate(target, cid)
-      end
+      def locate(target, cid); end
 
-      def all(start, ends, sort = SortOption.created, filter = nil, is_pop = false, toplev = true)
-      end
+      def all(start, ends, sort = SortOption.created, filter = nil, is_pop = false, toplev = true); end
 
-      def in_app(app, start, ends, sort = SortOption.created, filter = nil, toplev = true)
-      end
+      def in_app(app, start, ends, sort = SortOption.created, filter = nil, toplev = true); end
 
-      def num(is_pop = false)
-      end
+      def num(is_pop = false); end
 
-      def numof_target(app)
-      end
+      def numof_target(app); end
 
-      def search(text, inapp = nil, sort = SortOption.created, filter = nil, pop_only = false, toplev = false)
-      end
+      def search(text, inapp = nil, sort = SortOption.created, filter = nil, pop_only = false, toplev = false); end
 
-      def replies(cmid, extra = true)
-      end
+      def replies(cmid, extra = true); end
     end
 
     attr_accessor :id, :fetched
@@ -403,36 +334,26 @@ class Gaee
     alias :graph= graph_flag=
     alias :open? is_open
 
-    def created
-    end
+    def created; end
 
-    def fetch
-    end
+    def fetch; end
 
-    def close
-    end
+    def close; end
 
-    def delete
-    end
+    def delete; end
 
-    def image
-    end
+    def image; end
 
-    def image=(image)
-    end
+    def image=(image); end
 
-    def delete_image
-    end
+    def delete_image; end
 
     class << self
-      def create(badge, link = nil, label = nil, has_graph = false)
-      end
+      def create(badge, link = nil, label = nil, has_graph = false); end
 
-      def all(open = true)
-      end
+      def all(open = true); end
 
-      def search(text)
-      end
+      def search(text); end
     end
 
     attr_accessor :id, :fetched
@@ -440,20 +361,19 @@ class Gaee
 
   # Post
   class Post
+    # Mailbox item
     class PostItem
       def initialize; end
+
       %i[from target type cmid created_at].each { |s| attr_accessor s }
     end
 
     class << self
-      def create(target, ext, type = 0)
-      end
+      def create(target, ext, type = 0); end
 
-      def all(*type)
-      end
+      def all(*type); end
 
-      def delete(ctime)
-      end
+      def delete(ctime); end
     end
   end
 
@@ -478,21 +398,16 @@ class Gaee
       end
     end
 
-    def fetch
-    end
+    def fetch; end
 
-    def delete
-    end
+    def delete; end
 
     class << self
-      def create(type = 0, *accessable_to)
-      end
+      def create(type = 0, *accessable_to); end
 
-      def mine(type = nil, *accessable_to)
-      end
+      def mine(type = nil, *accessable_to); end
 
-      def shared(user = nil, type = nil, *accessable_to)
-      end
+      def shared(user = nil, type = nil, *accessable_to); end
     end
 
     attr_accessor :id, :fetched
@@ -501,39 +416,33 @@ class Gaee
   # Message Record
   class MessageRecord
     class << self
-      def numof
-      end
+      def numof; end
 
-      def all(start, ends)
-      end
+      def all(start, ends); end
 
-      def delete(ctime)
-      end
+      def delete(ctime); end
 
-      def delete_to(ctime)
-      end
+      def delete_to(ctime); end
     end
   end
 
   # Rank
   class Rank
+    # User rank item
     class RankItem
       def initialize; end
+
       %i[target user rank created_at].each { |s| attr_accessor s }
     end
 
     class << self
-      def create(aid, rank)
-      end
+      def create(aid, rank); end
 
-      def by_user(user)
-      end
+      def by_user(user); end
 
-      def by_app(app)
-      end
+      def by_app(app); end
 
-      def delete(app)
-      end
+      def delete(app); end
     end
   end
 end

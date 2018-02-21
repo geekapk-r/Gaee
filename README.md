@@ -18,11 +18,9 @@ Gaee 库 的具体食用方法请查看 `ri` 文档或者 [wiki](https://github.
 
 + `gem install 'json'` 因为 API 交换信息是使用 `JSON` 序列化的
 
-+ `gem install 'em-websocket'` _可选的_ 如果需要使用可能的即时推送频道的话
++ `gem install 'eventmachine' 'faye'` _可选的_ 如果需要使用可能的即时推送频道的话
 
 + `gem install 'awesome_print'` _因为作者比较懒就必须了_ CLI 需要打印好看的彩色字体
-
-+ `logger` 使用它记录一些日志
 
 + `open-uri` HTTP(S) 交互
 
@@ -30,7 +28,7 @@ Gaee 库 的具体食用方法请查看 `ri` 文档或者 [wiki](https://github.
 
 ## 模型们
 
-`Gaee::MODELS` 可以查看模型列表
+`Gaee::MODELS` 常量包含模型类列表
 
 具体的模型们：
 

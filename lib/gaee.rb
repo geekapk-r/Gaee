@@ -1,14 +1,10 @@
-require 'logger'
-
 require 'json'
 require 'open-uri'
 
-LOG = Logger.new STDOUT
-
 begin
-  require 'em-websocket'
+  require 'faye/websocket'
 rescue LoadError
-  LOG.warn('Failed to require WebSocket library, Gaee will not handle messages')
+  warn 'Failed to require WebSocket library'
 end
 
 require 'gaee/version'
@@ -16,11 +12,8 @@ require 'gaee/models'
 
 # GeekApk Client Library
 class Gaee
-  MODELS = [Post, PM, Comment, MessageRecord, Rank, App, Update, Recommend, User, Headline, Category]
-
-  def version
-    VERSION
-  end
+  MODELS = %i[App Category Comment Headline MessageRecord PM
+              Post Rank Recommend Update User].freeze
 
   def initialize; end
 
@@ -40,8 +33,12 @@ class Gaee
         last_update_token: nil
       }
     end
+
+    def default_pagecont; 20; end
+    def version; VERSION; end
   end
 
-  Connect = default_connect
-  Ident = default_ident
+  CONNECT = default_connect
+  IDENT = default_ident
+  PAGE = default_pagecont
 end

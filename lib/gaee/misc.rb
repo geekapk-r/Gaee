@@ -1,10 +1,16 @@
 ##
-# 闲杂的类和模块们
-# 可能 枚举 会比较多
+# Misc Classes and Modules
+# Most Option Enumerations
 
+# Gaee library scope
 class Gaee
   # Misc modules like Option modules
   module Misc
+    TOKEN_UPDATE_DELAY = 60 * 30
+    ABCS = 'abcdefghijklmnopqrstuvwxyz'.chars
+    NUMS = '0123456789'.chars
+    BASE64 = '\='.chars + NUMS + ABCS + ABCS.map(&:upcase)
+
     # GeekApk Comment Filter Options
     module FilterOption
       class << self
@@ -74,4 +80,10 @@ class Gaee
     end
   end
 
+  class << self
+    # Returns a random string includes Base64 chars
+    def new_token
+      %w[? ? ? ?].map { BASE64.sample }
+    end
+  end
 end

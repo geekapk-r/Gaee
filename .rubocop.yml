@@ -1,0 +1,23 @@
+Metrics/LineLength:
+  Exclude:
+    - 'lib/gaee/models.rb'
+
+Metrics/ParameterLists:
+  Exclude:
+    - 'lib/gaee/models.rb'
+
+Style/SingleLineMethods:
+  Exclude:
+    - 'lib/gaee.rb'
+
+Layout/EmptyLineBetweenDefs:
+  Exclude:
+    - 'lib/gaee.rb'
+
+Style/BlockDelimiters:
+  Exclude:
+    - 'lib/gaee/misc.rb'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'lib/gaee/cli.rb'

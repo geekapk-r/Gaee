@@ -6,7 +6,7 @@ require 'gaee'
 begin
   require 'awesome_print' # ap required for pretty print
 rescue LoadError
-  $stderr.puts 'Install awesome_print gem first.'
+  warn 'Install awesome_print gem first.'
   exit 1
 end
 
@@ -14,20 +14,21 @@ end
 module GCL; end
 
 # Main function
-def GCL.main(args = ARGV)
-end
+def GCL.main(args = ARGV); end
 
 # Print all models and its methods
 def GCL.print_models
-  Gaee::MODELS.each do |m|
+  mods.each do |m|
     puts "Model #{m.name}".yellow
-    if m.singleton_methods.any?
-      puts "Class Methods".red
-      ap m.singleton_methods
-    end
-    if m.instance_methods(false).any?
-      puts "Instance Methods".red
-      ap m.instance_methods(false)
+    sm = m.singleton_methods ms = m.instance_methods(false)
+    [['Class', sm], ['Instance', ms]].each do |i|
+      puts "#{i[0]} Methods".red
+      ap i[1] if i[1].any?
     end
   end
+end
+
+# Returns model classes
+def GCL.mods
+  Gaee::MODELS.map { |s| Gaee.const_get s }
 end

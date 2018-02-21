@@ -22,7 +22,7 @@ Gaee 库 的具体食用方法请查看 `ri` 文档或者 [wiki](https://github.
 
 + `gem install 'awesome_print'` _因为作者比较懒就必须了_ CLI 需要打印好看的彩色字体
 
-+ `open-uri` HTTP(S) 交互
++ `uri 和 net/https` HTTP(S) 交互
 
 + `gem 和 rake` _构建依赖_ 包管理和构建工具
 

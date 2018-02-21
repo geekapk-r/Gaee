@@ -1,5 +1,5 @@
 require 'json'
-require 'open-uri'
+require 'net/https'
 
 begin
   require 'faye/websocket'
